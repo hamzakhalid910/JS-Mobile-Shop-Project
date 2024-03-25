@@ -1,0 +1,32 @@
+.card {
+  padding: 10;
+  width: auto;
+  height: 400;
+  flex-wrap: wrap;
+  background-color: beige;
+  border-radius: 20px;
+  gap: 15px;
+  margin: auto;
+  justify-content: left;
+}
+.card img {
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  gap: 15px;
+  margin-top: 20;
+  width: 400px;
+}
+.container {
+  /* display: list-item; */
+  /* width: fit-content; */
+  gap: 15px;
+  /* flex-wrap: wrap; */
+  /* max-width: fit-content; */
+  /* width: auto; */
+  width: 50;
+  margin: auto;
+  /* display: flex; */
+  /* justify-content: center; */
+}
