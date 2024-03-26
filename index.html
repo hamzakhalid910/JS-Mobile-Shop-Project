@@ -1,67 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Project</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JS Project</title>
-  <link rel="stylesheet" href="index.css" />
-</head>
+  <body>
+    <div class="loader-containe">
+      <div class="loade"></div>
+    </div>
+    <h1>Mobile Products</h1>
 
-<body>
-  <h1>Mobile Products</h1>
+    <ul></ul>
+    <div class="container"></div>
 
-  <ul></ul>
-  <div class="container">
-
-  </div>
-
-  <script>
-    async function fetchData() {
-      try {
-        const res = await fetch("https://dummyjson.com/products/");
-        if (!res.ok) {
-          throw new Error("Error occurred while fetching data");
+    <script>
+      async function fetchData() {
+        try {
+          const res = await fetch("https://dummyjson.com/products/");
+          if (!res.ok) {
+            throw new Error("Error occurred while fetching data");
+          }
+          const data = await res.json();
+          return data;
+        } catch (error) {
+          console.error("Error occurred:", error);
+          throw error;
         }
-        const data = await res.json();
-        return data;
-      } catch (error) {
-        console.error("Error occurred:", error);
-        throw error;
       }
-    }
-    async function displayData() {
-      try {
-        const data = await fetchData();
-        data.products.forEach((element) => {
-          const container = document.querySelector(".container");
-          const card = document.createElement("div");
-          card.classList.add("card");
+      async function displayData() {
+        try {
+          const data = await fetchData();
+          data.products.forEach((element) => {
+            const container = document.querySelector(".container");
+            const card = document.createElement("div");
+            card.classList.add("card");
 
-          const title = document.createElement("h2");
-          title.textContent = element.title;
+            const title = document.createElement("h2");
+            title.textContent = element.title;
 
-          const image = document.createElement("img");
-          image.src = element.thumbnail;
+            const image = document.createElement("img");
+            image.src = element.thumbnail;
 
-          const price = document.createElement("price");
-          price.textContent = element.price;
+            const price = document.createElement("price");
+            price.textContent = element.price;
 
-          const rating = document.createElement("rating");
-          rating.textContent = element.rating;
+            const rating = document.createElement("rating");
+            rating.textContent = element.rating;
 
-          card.appendChild(title);
-          card.appendChild(image);
-          card.appendChild(price);
-          card.appendChild(rating);
-          container.appendChild(card);
-        });
-      } catch (error) {
-        console.error("Error occurred:", error);
+            const buyNow = document.createElement("button");
+            buyNow.textContent = "Buy Now";
+
+            buyNow.addEventListener("click", function () {
+              window.location.href = `productPage.html?id=${element.id}`;
+            });
+
+            card.appendChild(title);
+            card.appendChild(image);
+            card.appendChild(price);
+            card.appendChild(rating);
+            card.appendChild(buyNow);
+            container.appendChild(card);
+          });
+        } catch (error) {
+          console.error("Error occurred:", error);
+        }
       }
-    }
-    displayData();
-  </script>
-</body>
-
+      displayData();
+    </script>
+  </body>
 </html>

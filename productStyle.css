@@ -1,0 +1,15 @@
+* {
+  background-color: aquamarine;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin-left: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+.container {
+  border: 4px soid;
+  border-color: whitesmoke;
+  border-radius: 4px;
+  margin-top: 50px;
+}
