@@ -1,5 +1,6 @@
 * {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(118, 142, 252);
 }
 
 .title,
@@ -17,10 +18,14 @@ button {
   padding: 5px;
   background-color: green;
   border: 2px solid;
-  border-color: skyblue;
-  border-radius: 2px;
-  margin-top: 10px;
+  border-color: black;
+  border-radius: 8px;
   cursor: pointer;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  display: block;
+  margin: 0 auto;
 }
 
 .container {
@@ -35,10 +40,10 @@ button {
 
 .card {
   width: 220px;
-  height: 300px;
+  height: 320px;
   border: 2px solid;
-  border-color: red;
-  background-color: whitesmoke;
+  border-color: black;
+  background-color: rgb(118, 142, 252);
 }
 
 .card img {
@@ -54,12 +59,14 @@ button {
 }
 
 .card price {
+  margin-left: 10px;
 }
 
 .card rating {
   justify-content: right;
   gap: 10px;
-  /* margin-left: 0px; */
+  align-items: right;
+  margin-left: 110px;
 }
 
 .loader-container {
@@ -73,15 +80,22 @@ button {
   justify-content: center;
   align-items: center;
   z-index: 9999; /* Ensure loader is on top of other elements */
+  display: none;
 }
 
 .loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the loader */
+  align-items: center;
   border: 4px solid #f3f3f3;
   border-radius: 50%;
   border-top: 4px solid #3498db;
   width: 50px;
   height: 50px;
-  animation: spin 1s linear infinite;
+  animation: spin 2s linear infinite;
+  display: none;
 }
 
 @keyframes spin {

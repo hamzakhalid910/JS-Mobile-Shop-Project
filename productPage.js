@@ -27,7 +27,8 @@ function Update(details) {
   description.textContent = details.description;
 
   const price = document.createElement("p2");
-  price.textContent = details.price;
+  price.textContent = "$" + details.price;
+
   const image = document.createElement("img");
   image.src = details.thumbnail;
 

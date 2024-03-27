@@ -1,66 +1,56 @@
-// fetch("https://dummyjson.com/products/")
-//   .then((res) => {
-//     return res.json();
-//   })
-//   .then((data) => {
-//     data.forEach((product) => {
-//       const markup = <li>${product.title}</li>;
-
-//       document.querySelector("ul").insertAdjacentElement("beforeend", markup);
-//     });
-//   })
-//   .catch((error) => console.log(error));
-
-fetch("https://dummyjson.com/products/")
-  .then((res) => {
-    return res.json();
-  })
-  .then((data) => {
-    data.forEach((product) => {
-      const markup = `<li>${product.title}</li>`;
-
-      document.querySelector("ul").insertAdjacentHTML("beforeend", markup);
-    });
-  })
-  .catch((error) => console.error(error));
-
-/*
 async function fetchData() {
   try {
-    console.log("Fetching Data");
-    const response = await fetch("https://dummyjson.com/products/");
-    const data = await response.json();
+    const res = await fetch("https://dummyjson.com/products/");
+    if (!res.ok) {
+      throw new Error("Error occurred while fetching data");
+    }
+    const data = await res.json();
     return data;
   } catch (error) {
-    console.error("Error in fetching data", error);
+    console.error("Error occurred:", error);
+    throw error;
   }
 }
+async function displayData() {
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  try {
+    const data = await fetchData();
+    data.products.forEach((element) => {
+      const container = document.querySelector(".container");
+      const card = document.createElement("div");
+      card.classList.add("card");
 
-console.log(fetchData());
+      const title = document.createElement("h2");
+      title.textContent = element.title;
 
-async function renderData() {
-  const container = document.querySelector(".container");
-  const data = await fetchData();
+      const image = document.createElement("img");
+      image.src = element.thumbnail;
 
-  if (!data) {
-    return;
+      const price = document.createElement("price");
+      price.textContent = "$" + element.price;
+
+      const rating = document.createElement("rating");
+      rating.textContent = "★" + element.rating;
+
+      const buyNow = document.createElement("button");
+      buyNow.textContent = "Buy Now";
+
+      buyNow.addEventListener("click", function () {
+        window.location.href = `productPage.html?id=${element.id}`;
+      });
+
+      card.appendChild(title);
+      card.appendChild(image);
+      card.appendChild(price);
+      card.appendChild(rating);
+      card.appendChild(buyNow);
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Error occurred:", error);
+  } finally {
+    loader.style.display = "none";
   }
-
-  data.forEach((item) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-
-    const title = document.createElement("h2");
-    title.textContent = item.title;
-
-    const body = document.createElement("p");
-    body.textContent = item.body;
-
-    card.appendChild(title);
-    card.appendChild(body);
-    container.appendChild(card);
-  });
 }
-
-renderData();
-*/
+displayData();
